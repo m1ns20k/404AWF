@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Always Found.</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <!-- About 토글 추가 -->
+    <div class="about-container">
+        <img src="images/About_text.svg" alt="About" class="about-toggle">
+    </div>
+
+    <!-- 기존 컨텐츠 -->
+    <div class="main-content">
+        <div class="container">
+            <div class="box left-box">
+                <img src="images/s-a.svg" alt="s-a">
+            </div>
+            <div class="box center-box">
+                <img src="images/s-b.svg" alt="s-b">
+            </div>
+            <div class="box right-box">
+                <img src="images/s-c.svg" alt="s-c">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 이미지 배열
+        const images = [
+            's-a', 's-b', 's-c', 's-d', 's-e', 's-f', 's-g', 's-h', 's-i', 's-j', 's-k', 's-l',
+            's-m', 's-n', 's-o', 's-p', 's-q', 's-r', 's-s', 's-t', 's-u', 's-v', 's-w', 's-x',
+            's-y', 's-z'
+        ];
+
+        // 현재 인덱스
+        let currentIndex = 1;
+
+        // DOM 요소
+        const leftBox = document.querySelector('.left-box');
+        const centerBox = document.querySelector('.center-box');
+        const rightBox = document.querySelector('.right-box');
+        const centerImage = centerBox.querySelector('img');
+
+        // 이미지 업데이트 함수
+        function updateImages(direction) {
+            const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+            const nextIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+
+            // 애니메이션 적용
+            centerImage.classList.add(direction === 'left' ? 'slide-left' : 'slide-right');
+
+            // 애니메이션 완료 후 이미지 업데이트
+            setTimeout(() => {
+                leftBox.querySelector('img').src = `Images/${images[prevIndex]}.svg`;
+                centerBox.querySelector('img').src = `Images/${images[currentIndex]}.svg`;
+                rightBox.querySelector('img').src = `Images/${images[nextIndex]}.svg`;
+
+                // 애니메이션 클래스 제거
+                centerImage.classList.remove('slide-left', 'slide-right');
+            }, 300);
+        }
+
+        // 이벤트 리스너
+        leftBox.addEventListener('click', () => {
+            currentIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+            updateImages('left');
+        });
+
+        rightBox.addEventListener('click', () => {
+            currentIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+            updateImages('right');
+        });
+
+        // 초기 이미지 설정
+        updateImages();
+
+        // About 토글 기능 추가
+        const aboutContainer = document.querySelector('.about-container');
+        const aboutToggle = document.querySelector('.about-toggle');
+
+        aboutToggle.addEventListener('click', () => {
+            aboutContainer.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
+

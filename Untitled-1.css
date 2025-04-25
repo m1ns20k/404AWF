@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.split-container {
+    display: flex;
+    height: 100vh;
+    position: relative;
+}
+
+/* 가운데 구분선 제거하고 3개의 섹션으로 변경 */
+.left-section {
+    position: relative;
+    width: calc(50% - 1.545vw);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #EDEDED;
+    color: #000000;
+}
+
+.center-section {
+    width: 3.09vw;
+    height: 100vh;
+    background-color: #FAE585;
+}
+
+.right-section {
+    position: relative;
+    width: calc(50% - 1.545vw);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #339933;
+    color: #000000;
+}
+
+.content {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    will-change: transform;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+/* 텍스트 스타일 */
+.left-section h1 {
+    font-size: min(8vw, 80px);
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+    line-height: 2;
+    margin-bottom: 2rem;
+}
+
+.left-section p {
+    font-size: min(8vw, 80px);
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+    line-height: 2;
+    margin-bottom: 2rem;
+}
+
+.right-section h1 {
+    font-size: min(8vw, 80px);
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+    line-height: 2;
+    margin-bottom: 3.5rem;
+}
+
+/* 기본 애니메이션 */
+.left-section .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: normalScrollLeft 3600s linear infinite;
+    padding: 0;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.right-section .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: normalScrollRight 3600s linear infinite;
+    padding: 0;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 슬롯 머신 효과 */
+.is-spinning .left-section .content {
+    animation: slotSpinLeft 4s linear infinite !important;
+}
+
+.is-spinning .right-section .content {
+    animation: slotSpinRight 4s linear infinite !important;
+}
+
+.is-slowing .left-section .content {
+    animation: none !important;
+    transition: transform 4s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(-50%);
+}
+
+.is-slowing .right-section .content {
+    animation: none !important;
+    transition: transform 4s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(-50%);
+}
+
+/* 애니메이션 키프레임 */
+@keyframes normalScrollLeft {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(-90%); }
+}
+
+@keyframes normalScrollRight {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(-10%); }
+}
+
+@keyframes fastScrollLeft {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
+}
+
+@keyframes fastScrollRight {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100%); }
+}
+
+@keyframes slotSpinLeft {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
+}
+
+@keyframes slotSpinRight {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(0); }
+}
+
+/* Start 버튼 스타일 */
+#startButton {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 15px 30px;
+    font-size: 16px;
+    background-color: #000
